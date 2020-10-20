@@ -7,4 +7,11 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'mean-stack-app';
+  // empty array
+  storedPosts:Array<Object> = [];
+  // define function, get post 
+  onPostAdded(post: Object){
+    // push the received post object to posts Array
+    this.storedPosts.push(post);
+  }
 }

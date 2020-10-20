@@ -1,8 +1,11 @@
 <div class="container">
     <mat-card>
         <h3>Add Posts</h3>
+        <mat-form-field class="example-full-width">
+            <input matInput type="text" placeholder="Title goes Here" [(ngModel)]="postTitle">
+        </mat-form-field>
         <mat-form-field class="example-form-field">
-            <textarea rows="5" matInput [(ngModel)]="postValue"></textarea>
+            <textarea rows="5" matInput [(ngModel)]="postContent" placeholder="content goes here"></textarea>
         </mat-form-field><br>
         <button mat-raised-button color="primary" (click)="onAddPost()">Add Post</button>
         <br>

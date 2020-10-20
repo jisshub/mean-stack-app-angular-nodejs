@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-post-list',
@@ -10,7 +10,8 @@ export class PostListComponent implements OnInit {
   constructor() { 
     
   }
-  posts = []
+  // make posts property bindable from outside thru property binding
+  @Input() posts: Array<Object> = [];
 
   ngOnInit(): void {
   }
