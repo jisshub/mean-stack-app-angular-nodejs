@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Post } from './posts/post.model';
 
 @Component({
   selector: 'app-root',
@@ -8,9 +9,9 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'mean-stack-app';
   // empty array
-  storedPosts:Array<Object> = [];
+  storedPosts:Post[] = [];
   // define function, get post 
-  onPostAdded(post: Object){
+  onPostAdded(post){
     // push the received post object to posts Array
     this.storedPosts.push(post);
   }
