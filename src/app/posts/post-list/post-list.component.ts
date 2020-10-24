@@ -17,7 +17,9 @@ export class PostListComponent implements OnInit {
   @Input() posts: Post[] = [];
 
   ngOnInit(): void {
+    // call get post method here
     this.postService.getPosts();
+
   }
 
 }
