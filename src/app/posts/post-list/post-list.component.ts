@@ -14,12 +14,11 @@ export class PostListComponent implements OnInit {
     
   }
   // make posts property bindable from outside thru property binding
-  @Input() posts: Post[] = [];
+  posts: Post[] = [];
 
   ngOnInit(): void {
     // call get post method here
     this.postService.getPosts();
-
   }
 
 }

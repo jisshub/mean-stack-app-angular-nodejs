@@ -1,9 +1,9 @@
 <main>
     <app-header></app-header>
     <!-- received post object emitted from post create component -->
-    <app-post-create (postEvent)="onPostAdded($event)"></app-post-create>
+    <app-post-create></app-post-create>
     <!--property binding of posts property on storedPosts array-->
-    <app-post-list [posts]="storedPosts "></app-post-list>
+    <app-post-list></app-post-list>
 </main>
 
 
