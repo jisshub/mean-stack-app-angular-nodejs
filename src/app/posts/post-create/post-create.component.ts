@@ -20,6 +20,7 @@ export class PostCreateComponent implements OnInit {
     const post: Post = {title: form.value.title, content: form.value.postContent};
     // emit the post object
     this.postService.addPost(post);
+    form.resetForm();
   }
 
 } 

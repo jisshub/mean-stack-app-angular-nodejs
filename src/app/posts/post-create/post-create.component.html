@@ -3,11 +3,11 @@
         <h3>Add Posts</h3>
         <form (submit)="onAddPost(postForm)" #postForm="ngForm">
             <mat-form-field>
-                <input matInput type="text" placeholder="Title goes Here" ngModel name="title" required minlength="5" #title=ngModel>
+                <input matInput type="text" placeholder="Post Title" ngModel name="title" required minlength="5" #title=ngModel>
                 <mat-error *ngIf="title.invalid">Please give valid title</mat-error>
             </mat-form-field>
             <mat-form-field>
-                <textarea required rows="5" matInput ngModel placeholder="content goes here" name="content" minlength="10" #content="ngModel"></textarea>
+                <textarea required rows="5" matInput ngModel placeholder="Post Content" name="content" minlength="10" #content="ngModel"></textarea>
                 <mat-error *ngIf="content.invalid">Please give valid content</mat-error>
             </mat-form-field>
             <br>
