@@ -11,8 +11,7 @@ import { Subscription } from "rxjs";
 export class PostListComponent implements OnInit, OnDestroy {
 
   // inject PostService instance
-  constructor(public postService: PostService) { 
-    
+  constructor(public postService: PostService) {   
   }
   // make posts property bindable from outside thru property binding
   posts: Post[] = [];
