@@ -1,20 +1,19 @@
-import { Content } from '@angular/compiler/src/render3/r3_ast';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { title } from 'process';
 import { Subject } from 'rxjs';
 import { Post } from './post.model';
 @Injectable({
   providedIn: 'root'
 })
 export class PostService {
-constructor() { }
+constructor(public http: HttpClient) { }
   // create a private property of type Post array 
   private posts: Post[] = [];
   // create an instance of Subject with generic type as Post array.
   private postUpdated = new Subject<Post[]>();
-
   // adding new post
-  addPost(post: Post){
+  addPost(title: string, content: string){
+    const post: Post = {id: null, title: title, content: content};
     this.posts.push(post);
     // call next() on subject - pass copy of posts array as argument.
     this.postUpdated.next([...this.posts]);
@@ -22,7 +21,11 @@ constructor() { }
   getPosts(){
     // return copy of post array, use spread operator, so changes only affected on its copy, 
     // not the original array
-    return [...this.posts];
+    this.http.get<{message: string, post: Post[]}>('http://localhost:3000/api/posts')
+      .subscribe((postData) => {
+        this.posts = postData.post;
+        this.postUpdated.next([...this.posts]);
+      })
   }
 
   getPostUpdateListener(){
