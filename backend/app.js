@@ -1,7 +1,14 @@
+const { urlencoded } = require("express");
 const express= require("express");
 
 // initialize express app
 const app = express();
+
+// Used to parse incoming JSON object
+app.use(express.json());
+
+// parse url encoded bodies
+app.use(express.urlencoded()); 
 
 // set header
 app.use((req, res, next) => {
@@ -12,6 +19,16 @@ app.use((req, res, next) => {
     // only allow domains sending request with a set of http methods.
     res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, UPDATE, PATCH, OPTIONS")
     next();
+});
+
+// post request
+app.post("/api/posts",(req, res, next) => {
+    const post = req.body;
+    console.log(post);
+    return res.status(201).json({
+        message: "Data Posted",
+        post
+    })
 });
 
 // use express router - create a middleware
