@@ -3,17 +3,33 @@ const express= require("express");
 // initialize express app
 const app = express();
 
+// set header
+app.use((req, res, next) => {
+    // allow which domain to access the resources.
+    res.setHeader("Access-Control-Allow-Origin", "*");
+    // only allow domains sending request with certain set of header.
+    res.setHeader("Access-Control-Allow-Header","Origin, X-Requested-With, Content-Type, Accept");
+    // only allow domains sending request with a set of http methods.
+    res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, UPDATE, PATCH, OPTIONS")
+    next();
+});
+
 // use express router - create a middleware
 app.use('/api/posts', (req, res, next) => {
     const posts = [
                     {
                         id: 'post10101',
                         title: "This is first title", 
-                        content: 'This is second content'
+                        content: 'This is first content'
                     }, 
                     {
                         id: 'post10111', 
                         title: "This is second title", 
+                        content: "This is second content"
+                    },
+                    {
+                        id: 'post10112', 
+                        title: "This is third title", 
                         content: "This is third content"
                     }
                 ];
