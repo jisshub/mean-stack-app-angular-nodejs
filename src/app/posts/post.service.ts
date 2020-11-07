@@ -7,7 +7,7 @@ import { Post } from './post.model';
 })
 export class PostService {
   constructor(public http: HttpClient) { }
-  // create a private property of type Post array 
+  // create a private property of type Post array
   private posts: Post[] = [];
   // create an instance of Subject with generic type as Post array.
   private postUpdated = new Subject<Post[]>();
@@ -19,21 +19,28 @@ export class PostService {
       .subscribe((postData) => {
         this.posts = postData.posts;
         console.log(this.posts);
-
         this.postUpdated.next([...this.posts]);
-        
-      })
+      });
   }
 
   getPostUpdateListener(){
     // call asObservable method on postUpdated. which in turn returns an object.
     return this.postUpdated.asObservable();
   }
-    // adding new post
+
+  /**
+   *
+   * @param title : post title
+   * @param content : post content
+   */
   addPost(title: string, content: string){
-    const post: Post = {id: null, title: title, content: content};
-    this.posts.push(post);
-    // call next() on subject - pass copy of posts array as argument.
-    this.postUpdated.next([...this.posts]);
+    const post: Post = {id: null, title, content};
+    this.http.post<{message: string}>('http://localhost:3000/api/posts', post)
+        .subscribe((resData) => {
+          console.log(resData.message);
+          this.posts.push(post);
+          // call next() on subject - pass copy of posts array as argument.
+          this.postUpdated.next([...this.posts]);
+        });
   }
-}  
+}

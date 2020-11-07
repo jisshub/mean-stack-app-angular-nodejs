@@ -15,7 +15,7 @@ app.use((req, res, next) => {
     // allow which domain to access the resources.
     res.setHeader("Access-Control-Allow-Origin", "*");
     // only allow domains sending request with certain set of header.
-    res.setHeader("Access-Control-Allow-Header","Origin, X-Requested-With, Content-Type, Accept");
+    res.setHeader("Access-Control-Allow-Headers","Origin, X-Requested-With, Content-Type, Accept");
     // only allow domains sending request with a set of http methods.
     res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, UPDATE, PATCH, OPTIONS")
     next();
@@ -31,8 +31,8 @@ app.post("/api/posts",(req, res, next) => {
     })
 });
 
-// use express router - create a middleware
-app.use('/api/posts', (req, res, next) => {
+// fetch the post using get request
+app.get('/api/posts', (req, res, next) => {
     const posts = [
                     {
                         id: 'post10101',
