@@ -1,6 +1,9 @@
 const { urlencoded } = require("express");
 const express= require("express");
 
+// reuire Post Model
+const Post = require('./models/post');
+
 // initialize express app
 const app = express();
 
@@ -8,7 +11,7 @@ const app = express();
 app.use(express.json());
 
 // parse url encoded bodies
-app.use(express.urlencoded()); 
+app.use(express.urlencoded({extended: true})); 
 
 // set header
 app.use((req, res, next) => {
@@ -23,7 +26,10 @@ app.use((req, res, next) => {
 
 // post request
 app.post("/api/posts",(req, res, next) => {
-    const post = req.body;
+    const post = new Post({
+        title: req.body.title,
+        content: req.body.content
+    });
     console.log(post);
     return res.status(201).json({
         message: "Data Posted",
