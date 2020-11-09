@@ -1,11 +1,21 @@
 const { urlencoded } = require("express");
 const express= require("express");
+const mongoose = require("mongoose");
 
 // reuire Post Model
 const Post = require('./models/post');
 
 // initialize express app
 const app = express();
+
+// connect to mongodb database
+mongoose.connect("mongodb+srv://jissmonJose:<password>@cluster101.wqs3s.mongodb.net/node-angular?retryWrites=true&w=majority")
+        .then(() => {
+            console.log("Connected to Database!");
+        })
+        .catch(()=>{
+            console.log("Connection Failed!");
+        });
 
 // Used to parse incoming JSON object
 app.use(express.json());
@@ -30,6 +40,7 @@ app.post("/api/posts",(req, res, next) => {
         title: req.body.title,
         content: req.body.content
     });
+    post.save();
     console.log(post);
     return res.status(201).json({
         message: "Data Posted",
