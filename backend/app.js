@@ -9,7 +9,7 @@ const Post = require('./models/post');
 const app = express();
 
 // connect to mongodb database
-mongoose.connect("mongodb+srv://jissmonJose:<password>@cluster101.wqs3s.mongodb.net/node-angular?retryWrites=true&w=majority")
+mongoose.connect("mongodb+srv://jissmonJose:YsX6ghrRid3aK9Fx@cluster101.wqs3s.mongodb.net/node-angular?retryWrites=true&w=majority")
         .then(() => {
             console.log("Connected to Database!");
         })
@@ -50,25 +50,11 @@ app.post("/api/posts",(req, res, next) => {
 
 // fetch the post using get request
 app.get('/api/posts', (req, res, next) => {
-    const posts = [
-                    {
-                        id: 'post10101',
-                        title: "This is first title", 
-                        content: 'This is first content'
-                    }, 
-                    {
-                        id: 'post10111', 
-                        title: "This is second title", 
-                        content: "This is second content"
-                    },
-                    {
-                        id: 'post10112', 
-                        title: "This is third title", 
-                        content: "This is third content"
-                    }
-                ];
-   // send the response as json - set status as 200 means success
-    res.status(200).json({message: 'post fetched successfully', posts});
+   Post.find().then(document => {
+       // send the response as json - set status as 200 means success
+    res.status(200).json({message: 'post fetched successfully'}, document);
+   });
+   
 });
     
 // export the app
