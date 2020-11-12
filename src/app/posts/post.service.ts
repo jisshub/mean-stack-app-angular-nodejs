@@ -2,6 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { Post } from './post.model';
+import {map} from 'rxjs/operators';
+import { _DisposeViewRepeaterStrategy } from '@angular/cdk/collections';
 @Injectable({
   providedIn: 'root'
 })
@@ -15,7 +17,16 @@ export class PostService {
   getPosts(){
     // return copy of post array, use spread operator, so changes only affected on its copy, 
     // not the original array
-    this.http.get<{message: string, posts: Post[]}>('http://localhost:3000/api/posts')
+    this.http.get<{message: string, posts: any}>('http://localhost:3000/api/posts')
+      .pipe(map(postData => {
+        return postData.posts.map(post => {
+          return {
+             title: post.title,
+             content: post.content,
+             id: post._id
+          };
+        });
+      }))
       .subscribe((postData) => {
         this.posts = postData.posts;
         console.log(this.posts);

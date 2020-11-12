@@ -35,7 +35,7 @@ app.use((req, res, next) => {
 });
 
 // post request
-app.post("/api/posts",(req, res, next) => {
+app.post("/api/posts",(req, res) => {
     const post = new Post({
         title: req.body.title,
         content: req.body.content
@@ -49,7 +49,7 @@ app.post("/api/posts",(req, res, next) => {
 });
 
 // fetch the post using get request
-app.get('/api/posts', (req, res, next) => {
+app.get('/api/posts', (req, res) => {
    Post.find().then(document => {
        // send the response as json - set status as 200 means success
     res.status(200).json({message: 'post fetched successfully'}, document);
