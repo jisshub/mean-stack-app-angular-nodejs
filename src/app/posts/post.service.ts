@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { Post } from './post.model';
-import {map} from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { _DisposeViewRepeaterStrategy } from '@angular/cdk/collections';
 @Injectable({
   providedIn: 'root'
@@ -53,5 +53,11 @@ export class PostService {
           // call next() on subject - pass copy of posts array as argument.
           this.postUpdated.next([...this.posts]);
         });
+  }
+  deletPost(postId: string){
+    this.http.delete('http://localhost:3000/api/posts/' + postId)
+      .subscribe(() => {
+        console.log('Post Deleted');
+      });
   }
 }

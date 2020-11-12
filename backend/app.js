@@ -30,7 +30,7 @@ app.use((req, res, next) => {
     // only allow domains sending request with certain set of header.
     res.setHeader("Access-Control-Allow-Headers","Origin, X-Requested-With, Content-Type, Accept");
     // only allow domains sending request with a set of http methods.
-    res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, UPDATE, PATCH, OPTIONS")
+    res.setHeader("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT, UPDATE, PATCH, OPTIONS")
     next();
 });
 
@@ -52,10 +52,21 @@ app.post("/api/posts",(req, res) => {
 app.get('/api/posts', (req, res) => {
    Post.find().then(document => {
        // send the response as json - set status as 200 means success
-    res.status(200).json({message: 'post fetched successfully'}, document);
-   });
+    res.json(200, {message: 'post fetched successfully'}, document);
+   }).catch(err => {
+       console.log(err.message);
+   })
    
 });
-    
+
+// delete the post
+app.delete('/api/posts/:id' ,(req, res) => {
+    // delete using id
+    Post.deleteOne({_id: req.params.id})
+        .then(result => {
+            console.log(result);
+        });
+    res.status(200).json({message: 'post deleted'});
+});
 // export the app
 module.exports = app;
