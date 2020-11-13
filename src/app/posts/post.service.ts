@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { Post } from './post.model';
 import { map } from 'rxjs/operators';
-import { _DisposeViewRepeaterStrategy } from '@angular/cdk/collections';
 @Injectable({
   providedIn: 'root'
 })
@@ -28,7 +27,7 @@ export class PostService {
         });
       }))
       .subscribe((postData) => {
-        this.posts = postData.posts;
+        this.posts = postData;
         console.log(this.posts);
         this.postUpdated.next([...this.posts]);
       });

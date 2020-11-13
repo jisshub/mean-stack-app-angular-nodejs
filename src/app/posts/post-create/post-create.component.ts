@@ -1,6 +1,5 @@
 import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { Post } from '../post.model';
 import { PostService } from '../post.service';
 
 @Component({
@@ -11,8 +10,8 @@ import { PostService } from '../post.service';
 export class PostCreateComponent implements OnInit {
 
   constructor(public postService: PostService) { }
-  postTitle: string ="";
-  postContent: string ="";
+  postTitle = '';
+  postContent = '';
   ngOnInit(): void {
   }
 
@@ -23,5 +22,4 @@ export class PostCreateComponent implements OnInit {
     this.postService.addPost(form.value.title, form.value.content);
     form.resetForm();
   }
-
-} 
+}

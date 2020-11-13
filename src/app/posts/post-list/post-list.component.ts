@@ -22,14 +22,15 @@ export class PostListComponent implements OnInit, OnDestroy {
     .subscribe((post: Post[]) => {
       // set posts property with post array received.
       this.posts = post;
+      console.log(this.posts);
     });
-  }
-  ngOnDestroy(){
-    // unsubscribe
-      this.postSub.unsubscribe();
   }
   onDelete(postId: string){
     // call deletPost from service.
     this.postService.deletPost(postId);
-  }
+  };
+  ngOnDestroy(){
+  // unsubscribe
+    this.postSub.unsubscribe();
+  };
 }
